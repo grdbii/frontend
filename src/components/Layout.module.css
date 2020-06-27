@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+html {
+    overflow: hidden;
+}
+
+.layout {
+    min-width: 1400px;
+}
+
+.particles {
+    position: absolute;
+    height: 100vh;
+    z-index: -1000;
+    top: 0;
+    left: 0;
+    right: 0;
+}
