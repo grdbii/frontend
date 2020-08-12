@@ -5,21 +5,25 @@ import Viewport from "./Viewport"
 
 import styles from "./Latex.module.css"
 
-const EquationSet = ({ type, equations }) => {
-  if (!equations || !equations.length) {
-    return null
+const EquationSet = ({ loading, variant, type, equations }) => {
+  if (loading) {
+    return (
+      <Viewport className={styles.equationSet} width="960px">
+        Loading...
+      </Viewport>
+    )
   }
 
-  let fontSize = 100 * (1 + 0.6 / (1 + Math.exp(equations.length - 4)))
-  let latex = Array.isArray(equations)
-    ? equations.map((equation, index) => <Equation key={`${type}${index}`} equation={equation} />)
-    : <Equation equation={equations} />
+  const fontSize = 100 * (1 + 0.6 / (1 + Math.exp(equations.length - 4)))
+  const latex = Array.isArray(equations) ? (
+    equations.map((equation, index) => (
+      <Equation key={`${variant}:${type}:${index}`} equation={equation} />
+    ))
+  ) : (
+    <Equation equation={equations} />
+  )
   return (
-    <Viewport
-      className={styles.equationSet}
-      fontSize={fontSize}
-      width="960px"
-    >
+    <Viewport className={styles.equationSet} fontSize={fontSize} width="960px">
       {latex}
     </Viewport>
   )

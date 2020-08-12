@@ -7,18 +7,20 @@ import SecondaryTitle from "./SecondaryTitle"
 export const Title = ({ primary, section }) => (
   <StaticQuery
     query={graphql`
-        query {
-          site {
-            siteMetadata {
-              title
-            }
+      query {
+        site {
+          siteMetadata {
+            title
           }
         }
-      `}
+      }
+    `}
     render={({ site }) =>
-        primary
-          ? <PrimaryTitle title={site.siteMetadata.title} />
-          : <SecondaryTitle title={site.siteMetadata.title} section={section} />
+      primary ? (
+        <PrimaryTitle title={site.siteMetadata.title} />
+      ) : (
+        <SecondaryTitle title={site.siteMetadata.title} section={section} />
+      )
     }
   />
 )

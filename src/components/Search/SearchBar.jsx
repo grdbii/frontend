@@ -9,8 +9,12 @@ import styles from "./Search.module.css"
 
 const SearchBar = ({ suggestions, handleInput }) => {
   const ref = React.createRef()
-  const addHighlight = () => { ref.current.classList.add(styles.highlight) }
-  const removeHighlight = () => { ref.current.classList.remove(styles.highlight) }
+  const addHighlight = () => {
+    ref.current.classList.add(styles.highlight)
+  }
+  const removeHighlight = () => {
+    ref.current.classList.remove(styles.highlight)
+  }
 
   return (
     <div className={styles.searchBar} ref={ref}>

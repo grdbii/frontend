@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import { parse } from "query-string"
 
-import { retrieve } from "../util/request"
+import { retrieve, search } from "../util/request"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -10,28 +10,36 @@ import { Title } from "../components/Title"
 import { Search } from "../components/Search"
 import { Latex } from "../components/Latex"
 
-class ViewPage extends React.Component {
-  constructor({ props, location }) {
-    super(props)
-    let key = parse(location.search)["m"]
-    this.state = {name: "", metric: null}
-    this.fetch = retrieve(key)
-  }
+const ViewPage = ({ location }) => {
+  const [metric, setMetric] = useState()
+  const [variations, setVariations] = useState([])
 
-  componentDidMount() {
-    this.fetch.then(resp => this.setState(resp))
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      setMetric(await retrieve(parse(location.search)["m"]))
+    }
+    fetchData()
+  }, [location])
 
-  render() {
-    return (
-      <Layout>
-        <SEO title="View" />
-        <Title section={this.state.name} />
-        <Search />
-        <Latex metric={this.state} />
-      </Layout>
-    )
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      setVariations(
+        await search({ name: metric.name }).then(resp =>
+          resp.filter(variant => variant.name === metric.name)
+        )
+      )
+    }
+    metric && fetchData()
+  }, [metric])
+
+  return (
+    <Layout>
+      <SEO title="View" />
+      <Title section={metric ? metric.name : ""} />
+      <Search />
+      {metric && <Latex data={{ metric: metric, variations: variations }} />}
+    </Layout>
+  )
 }
 
 export default ViewPage

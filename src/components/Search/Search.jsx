@@ -8,7 +8,7 @@ import styles from "./Search.module.css"
 export class Search extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {suggestions: []}
+    this.state = { suggestions: [] }
   }
 
   render() {
@@ -16,10 +16,8 @@ export class Search extends React.Component {
       <div className={styles.search}>
         <SearchBar
           suggestions={this.state.suggestions}
-          handleInput={
-            input => suggest(input).then(resp =>
-              this.setState({suggestions: resp})
-            )
+          handleInput={input =>
+            suggest(input).then(resp => this.setState({ suggestions: resp }))
           }
         />
       </div>

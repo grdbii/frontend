@@ -17,11 +17,12 @@ class Equation extends React.Component {
     return (
       <div
         className={styles.equation}
-        onMouseEnter={() => this.copyButton.style.visibility = `visible`}
-        onMouseLeave={() => this.copyButton.style.visibility = `hidden`}
+        role="region"
+        onMouseEnter={() => (this.copyButton.style.visibility = `visible`)}
+        onMouseLeave={() => (this.copyButton.style.visibility = `hidden`)}
       >
         <CopyButton
-          buttonRef={element => this.copyButton = element}
+          buttonRef={element => (this.copyButton = element)}
           text={this.equation}
         />
         <div className={styles.latex}>

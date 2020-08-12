@@ -3,7 +3,7 @@ module.exports = {
     title: `GRDBII`,
     description: `The General Relativity Database of Exact Solutions to Einstein's Field Equations`,
     author: `@cjayross`,
-    backend_url: `http://localhost:4000`
+    backend_url: `http://localhost:4000`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,8 +24,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `util`,
-        path: `${__dirname}/src/util`
-      }
+        path: `${__dirname}/src/util`,
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
