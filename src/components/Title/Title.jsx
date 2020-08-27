@@ -11,13 +11,17 @@ export const Title = ({ primary, section }) => (
         site {
           siteMetadata {
             title
+            subtitle
           }
         }
       }
     `}
     render={({ site }) =>
       primary ? (
-        <PrimaryTitle title={site.siteMetadata.title} />
+        <PrimaryTitle
+          title={site.siteMetadata.title}
+          subtitle={site.siteMetadata.subtitle}
+        />
       ) : (
         <SecondaryTitle title={site.siteMetadata.title} section={section} />
       )

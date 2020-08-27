@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     <div className={styles.layout}>
       <Particles className={styles.particles} params={particleOptions} />
       <main>{children}</main>
-      <footer></footer>
+      <footer>©2020 Calvin Ross, Mustapha Ishak</footer>
     </div>
   )
 }

@@ -3,11 +3,11 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
-import ResultsList from "./ResultsList"
+import Suggestions from "./Suggestions"
 
 import styles from "./Search.module.css"
 
-const SearchBar = ({ suggestions, handleInput }) => {
+const SearchBar = ({ suggestions, query, handleInput }) => {
   const ref = React.createRef()
   const addHighlight = () => {
     ref.current.classList.add(styles.highlight)
@@ -23,6 +23,7 @@ const SearchBar = ({ suggestions, handleInput }) => {
         className={styles.searchInput}
         type="text"
         name="query"
+        placeholder="Search spacetimes..."
         aria-label="Search GRDBII Database"
         maxLength="2048"
         spellCheck="false"
@@ -32,7 +33,7 @@ const SearchBar = ({ suggestions, handleInput }) => {
         onFocus={addHighlight}
         onBlur={removeHighlight}
       />
-      <ResultsList results={suggestions} />
+      <Suggestions suggestions={suggestions} query={query} />
     </div>
   )
 }

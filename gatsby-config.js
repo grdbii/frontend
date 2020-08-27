@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `GRDBII`,
+    subtitle: `The General Relativity Database II`,
     description: `The General Relativity Database of Exact Solutions to Einstein's Field Equations`,
     author: `@cjayross`,
     backend_url: `http://localhost:4000`,

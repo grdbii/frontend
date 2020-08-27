@@ -1,27 +1,27 @@
-export const suggest = query => {
-  let url = new URL(`http://localhost:4000/repo/suggest`)
-  url.searchParams.append(`query`, JSON.stringify(query))
+export const retrieve = id => {
+  let url = new URL(`http://localhost:4001/metric`)
+  url.searchParams.append(`id`, id)
   return fetch(url, { method: "GET" }).then(resp => resp.json())
 }
 
-export const retrieve = key => {
-  let url = new URL(`http://localhost:4000/repo/retrieve`)
-  url.searchParams.append(`key`, key)
-  return fetch(url, { method: "GET" }).then(resp => resp.json())
-}
-
-export const search = params => {
-  let url = new URL(`http://localhost:4000/repo/search`)
-  Object.entries(params).map(entry =>
-    url.searchParams.append(entry[0], JSON.stringify(entry[1]))
+export const search = query => {
+  let url = new URL(`http://localhost:4001/search`)
+  url.searchParams.append(`q`, query)
+  return fetch(url, { method: "GET" }).then(resp =>
+    resp.status === 204 ? [] : resp.json()
   )
+}
+
+export const variants = name => {
+  let url = new URL(`http://localhost:4001/variants`)
+  url.searchParams.append(`name`, name)
   return fetch(url, { method: "GET" }).then(resp => resp.json())
 }
 
-export const calculate = request => {
-  let url = new URL(`http://localhost:4000/algebra/calculate`)
-  Object.entries(request).map(entry =>
-    url.searchParams.append(entry[0], JSON.stringify(entry[1]))
+export const calculate = params => {
+  let url = new URL(`http://localhost:4001/calc`)
+  Object.entries(params).map(entry =>
+    url.searchParams.append(entry[0], entry[1])
   )
   return fetch(url, { method: "GET" }).then(resp => resp.json())
 }

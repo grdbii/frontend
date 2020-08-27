@@ -1,26 +1,29 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
-import { suggest } from "../../util/request"
+import { search } from "../../util/request"
 import SearchBar from "./SearchBar"
 
 import styles from "./Search.module.css"
 
-export class Search extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { suggestions: [] }
-  }
+export const Search = () => {
+  const [suggestions, setSuggestions] = useState([])
+  const [query, setQuery] = useState("")
 
-  render() {
-    return (
-      <div className={styles.search}>
-        <SearchBar
-          suggestions={this.state.suggestions}
-          handleInput={input =>
-            suggest(input).then(resp => this.setState({ suggestions: resp }))
-          }
-        />
-      </div>
-    )
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      setSuggestions(await search(query))
+    }
+
+    fetchData()
+  }, [query])
+
+  return (
+    <div className={styles.search}>
+      <SearchBar
+        suggestions={suggestions}
+        query={query}
+        handleInput={setQuery}
+      />
+    </div>
+  )
 }

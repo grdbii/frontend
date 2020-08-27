@@ -9,12 +9,25 @@ import Viewport from "./Viewport"
 import "katex/dist/katex.min.css"
 import styles from "./Latex.module.css"
 
-const Controller = ({ metric, variations, setMetric, setCalculation }) => {
+const Controller = ({
+  metric,
+  variations,
+  setMetric,
+  setCalculation,
+  setLoading,
+}) => {
   const DataList = ({ title, list, apply = x => x }) =>
     list && list.length ? <Data title={title}>{apply(list)}</Data> : null
 
   const Button = ({ name, calculation }) => (
-    <button onClick={() => setCalculation(calculation)}>{name}</button>
+    <button
+      onClick={() => {
+        setLoading(true)
+        setCalculation(calculation)
+      }}
+    >
+      {name}
+    </button>
   )
 
   return (

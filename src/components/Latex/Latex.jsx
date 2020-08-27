@@ -8,38 +8,42 @@ import EquationSet from "./EquationSet"
 import styles from "./Latex.module.css"
 
 export const Latex = ({ data }) => {
-  let [metric, setMetric] = useState(data.metric)
-  let [calculation, setCalculation] = useState("metric")
-  let [equations, setEquations] = useState(metric.metric)
-  let [loading, setLoading] = useState(false)
+  const [metric, setMetric] = useState(data.metric)
+  const [calculation, setCalculation] = useState("metric")
+  const [equations, setEquations] = useState(metric.metric)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const requestCalculation = async () => {
-      setLoading(true)
-      setEquations(
-        await calculate({
-          attr: calculation,
-          name: metric.name,
-          variant: metric.variant,
-        })
-      )
+    if (!loading) {
+      return
+    }
+
+    const fetchData = async () => {
+      setEquations(await calculate({ id: metric.id, attr: calculation }))
       setLoading(false)
     }
 
-    requestCalculation()
-  }, [metric, calculation])
+    if (metric[calculation] && metric[calculation].length !== 0) {
+      setEquations(metric[calculation])
+      setLoading(false)
+    } else {
+      fetchData()
+    }
+  }, [loading, metric, calculation])
 
   return (
     <div className={styles.latexLayout}>
       <Controller
         metric={metric}
         variations={data.variations}
+        calculation={calculation}
         setMetric={setMetric}
         setCalculation={setCalculation}
+        setLoading={setLoading}
       />
       <EquationSet
         loading={loading}
-        variant={metric.variant}
+        id={metric.id}
         type={calculation}
         equations={equations}
       />
