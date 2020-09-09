@@ -24,7 +24,7 @@ const ViewPage = ({ location }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setVariations(await variants({ name: metric.name }))
+      setVariations(await variants(metric.name))
     }
 
     metric && fetchData()

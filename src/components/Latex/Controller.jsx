@@ -36,7 +36,10 @@ const Controller = ({
         <VariationSelect
           defaultValue={metric}
           variations={variations}
-          onChange={setMetric}
+          onChange={metric => {
+            setLoading(true)
+            setMetric(metric)
+          }}
         />
         <Latex>{`$ (${metric.coordinates}) $`}</Latex>
       </Data>
