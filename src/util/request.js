@@ -1,3 +1,9 @@
+export const list = page => {
+  let url = new URL(`http://localhost:4001/list`)
+  url.searchParams.append(`p`, page)
+  return fetch(url, { method: "GET" }).then(resp => resp.json())
+}
+
 export const retrieve = id => {
   let url = new URL(`http://localhost:4001/metric`)
   url.searchParams.append(`id`, id)

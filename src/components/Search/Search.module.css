@@ -12,7 +12,7 @@
 
 .search-bar {
   display: grid;
-  grid-template-columns: 40px auto;
+  grid-template-columns: 40px auto 70px;
   position: absolute;
   width: 100%;
   border: 1px solid #dfe1e5;
@@ -43,6 +43,31 @@
 
 .highlight {
   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
+.list-all {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.list-all-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #b4b8c2;
+  background: transparent;
+}
+
+.list-all-button:hover {
+  color: #434853;
+}
+
+.tooltip {
+  font-size: 0.9rem !important;
+  padding: 4px 10px;
 }
 
 .search-suggestion {
