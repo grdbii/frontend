@@ -1,27 +1,57 @@
 import React, { useState } from "react"
-
+import styled from "styled-components"
 import Particles from "react-particles-js"
-import particleOptions from "../../assets/particles.json"
+import particleOptions from "../assets/particles.json"
 
-import { Modal, ModalContext } from "./Modal"
+import Modal, { ModalContext } from "./Modal"
 
-import "./skeleton.css"
-import styles from "./Layout.module.css"
+import "../assets/styles.css"
 
-const Layout = ({ children }) => {
-  const [modalState, setModal] = useState(true)
+const Container = styled.div`
+  overflow: hidden;
+`
+
+const ParticlesOverlay = styled(Particles)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1000;
+`
+
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const Footer = styled.footer`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2.5rem;
+  text-align: center;
+
+  opacity: 0.5;
+`
+
+const Layout = props => {
+  const [modalState, setModal] = useState(false)
 
   return (
-    <div className={styles.layout}>
-      <Particles className={styles.particles} params={particleOptions} />
-      <main>
+    <Container>
+      <ParticlesOverlay params={particleOptions} />
+      <MainContainer>
         <ModalContext.Provider value={setModal}>
           {modalState && <Modal />}
-          {children}
+          {props.children}
         </ModalContext.Provider>
-      </main>
-      <footer>©2020 Calvin Ross, Mustapha Ishak</footer>
-    </div>
+      </MainContainer>
+      <Footer>©2020 Calvin Ross, Mustapha Ishak</Footer>
+    </Container>
   )
 }
 
